@@ -14,6 +14,7 @@ type AccessTokenResult struct {
 	ExpiresIn    uint32 `json:"expires_in"`
 	RefreshToken string `json:"refresh_token"`
 	OpenID       string `json:"openid"`
+	UnionID      string `json:"unionid"`
 	Scope        string `json:"scope"` // "," seperated
 }
 
