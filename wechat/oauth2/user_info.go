@@ -22,25 +22,21 @@ type UserInfoResult struct {
 	Privilege  []string `json:"privilege"`
 }
 
-// Get user information from access_token.
+// Get user information from access_token. Return error only when there
+// is error in transport. Caller should also check r.Error().
 func (o *OAuth2) UserInfo(ctx context.Context, access_token, openid, lang string, l wx.Logger) (
-	r *UserInfoResult, err error) {
+	*UserInfoResult, error) {
 
-	r = &UserInfoResult{}
+	r := &UserInfoResult{}
 
-	if err = o.callOAuth2API(ctx,
+	if err := o.callOAuth2API(ctx,
 		"https://api.weixin.qq.com/sns/userinfo?"+url.Values{
 			"access_token": []string{access_token},
 			"openid":       []string{openid},
 			"lang":         []string{lang},
 		}.Encode(), r, l); err != nil {
-
-		return
-
+		return nil, err
 	}
-
-	err = r.Error()
-
-	return
+	return r, nil
 
 }
