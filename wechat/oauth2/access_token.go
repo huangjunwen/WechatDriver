@@ -15,8 +15,9 @@ type AccessTokenResult struct {
 	ExpiresIn    uint32 `json:"expires_in"`
 	RefreshToken string `json:"refresh_token"`
 	OpenID       string `json:"openid"`
-	UnionID      string `json:"unionid"`
 	Scope        string `json:"scope"` // "," seperated
+	// NOTE: UnionID is an undocumented field.
+	UnionID string `json:"unionid"`
 }
 
 // Scopes return the authorized scopes of the access token.
