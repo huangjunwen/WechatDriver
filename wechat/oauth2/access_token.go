@@ -34,6 +34,16 @@ func (r *AccessTokenResult) Scopes() (ret []OAuth2Scope) {
 	return
 }
 
+// HasScope check a scope's existence.
+func (r *AccessTokenResult) HasScope(scope OAuth2Scope) bool {
+	for _, scp := range r.Scopes() {
+		if scp == scope {
+			return true
+		}
+	}
+	return false
+}
+
 // Get access token (and refresh token) from code. Return error only when there
 // is error in transport. Caller should also check r.Error().
 func (o *OAuth2) AccessToken(ctx context.Context, code string, l wx.Logger) (
