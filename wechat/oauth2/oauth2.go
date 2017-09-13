@@ -40,3 +40,8 @@ func NewOAuth2(config *wx.AppConfig, client *http.Client) (*OAuth2, error) {
 	}, nil
 
 }
+
+// Return the config associated.
+func (o *OAuth2) Config() *wx.AppConfig {
+	return o.config
+}

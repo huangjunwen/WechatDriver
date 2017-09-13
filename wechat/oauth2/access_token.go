@@ -4,6 +4,7 @@ import (
 	"context"
 	wx "github.com/huangjunwen/WechatDriver/wechat"
 	"net/url"
+	"strings"
 )
 
 // The result of OAuth2.AccessToken and OAuth2.RefreshAccessToken
@@ -16,6 +17,20 @@ type AccessTokenResult struct {
 	OpenID       string `json:"openid"`
 	UnionID      string `json:"unionid"`
 	Scope        string `json:"scope"` // "," seperated
+}
+
+// Scopes return the authorized scopes of the access token.
+func (r *AccessTokenResult) Scopes() (ret []OAuth2Scope) {
+	for _, scope := range strings.Split(r.Scope, ",") {
+		switch scope {
+		case string(OAUTH2_SCOPE_BASE):
+			ret = append(ret, OAUTH2_SCOPE_BASE)
+		case string(OAUTH2_SCOPE_USERINFO):
+			ret = append(ret, OAUTH2_SCOPE_USERINFO)
+		default:
+		}
+	}
+	return
 }
 
 // Get access token (and refresh token) from code. Return error only when there
