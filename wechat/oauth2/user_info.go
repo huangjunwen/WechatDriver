@@ -13,6 +13,7 @@ type UserInfoResult struct {
 	OpenID   string `json:"openid"`
 	UnionID  string `json:"unionid"`
 	Nickname string `json:"nickname"`
+	Language string `json:"language"`
 	// ....sex...
 	Sex        int      `json:"sex"`
 	City       string   `json:"city"`
